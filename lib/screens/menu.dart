@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mental_health_tracker/widgets/left_drawer.dart';
+import 'package:mental_health_tracker/screens/moodentry_form.dart';
 
 class MyHomePage extends StatelessWidget {
   final String npm = '2306165881'; // NPM
@@ -22,8 +24,11 @@ class MyHomePage extends StatelessWidget {
         ),
         // Warna latar belakang AppBar diambil dari skema warna tema aplikasi.
         backgroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       // Body halaman dengan padding di sekelilingnya.
+      // Masukkan drawer sebagai parameter nilai drawer dari widget Scaffold
+      drawer: const LeftDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         // Menyusun widget secara vertikal dalam sebuah kolom.
@@ -156,10 +161,17 @@ class ItemCard extends StatelessWidget {
           // Menampilkan pesan SnackBar saat kartu ditekan.
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
+            ..showSnackBar(SnackBar(
+              content: Text("Kamu telah menekan tombol ${item.name}!")));
+            // Navigate ke route yang sesuai (tergantung jenis tombol)
+          if (item.name == "Tambah Mood") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const MoodEntryFormPage()),
             );
+          } 
         },
+
         // Container untuk menyimpan Icon dan Text
         child: Container(
           padding: const EdgeInsets.all(8),
