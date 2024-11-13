@@ -89,7 +89,7 @@ class MyHomePage extends StatelessWidget {
       ),
     );
   
-}
+  }
 
   final List<ItemHomepage> items = [
          ItemHomepage("Lihat Mood", Icons.mood),
