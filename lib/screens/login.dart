@@ -1,9 +1,8 @@
-import 'package:mental_health_tracker/screens/menu.dart';
 import 'package:flutter/material.dart';
+import 'package:mental_health_tracker/screens/menu.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:mental_health_tracker/screens/register.dart';
-// TODO: Import halaman RegisterPage jika sudah dibuat
 
 void main() {
   runApp(const LoginApp());
@@ -99,15 +98,11 @@ class _LoginPageState extends State<LoginPage> {
                       String username = _usernameController.text;
                       String password = _passwordController.text;
 
-                      // Cek kredensial
-                      // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-                      // Untuk menyambungkan Android emulator dengan Django pada localhost,
-                      // gunakan URL http://10.0.2.2/
-                      final response = await request
-                          .login("http://127.0.0.1:8000/auth/login/", {
-                        'username': username,
-                        'password': password,
-                      });
+                      // Authenticate
+                      final response = await request.login(
+                        "http://127.0.0.1:8000/auth/login/",
+                        {'username': username, 'password': password},
+                      );
 
                       if (request.loggedIn) {
                         String message = response['message'];
@@ -116,14 +111,15 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => MyHomePage()),
+                              builder: (context) => MyHomePage(),
+                            ),
                           );
                           ScaffoldMessenger.of(context)
                             ..hideCurrentSnackBar()
                             ..showSnackBar(
                               SnackBar(
-                                  content:
-                                      Text("$message Selamat datang, $uname.")),
+                                content: Text("$message Selamat datang, $uname."),
+                              ),
                             );
                         }
                       } else {
@@ -148,8 +144,8 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
-                      minimumSize: Size(double.infinity, 50),
                       backgroundColor: Theme.of(context).colorScheme.primary,
+                      minimumSize: const Size(double.infinity, 50),
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                     ),
                     child: const Text('Login'),
@@ -160,7 +156,8 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const RegisterPage()),
+                          builder: (context) => const RegisterPage(),
+                        ),
                       );
                     },
                     child: Text(

@@ -124,9 +124,10 @@ class _MoodEntryFormPageState extends State<MoodEntryFormPage> {
                 alignment: Alignment.bottomCenter,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
+                  child: 
+                  ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
+                      backgroundColor: WidgetStateProperty.all(
                         Theme.of(context).colorScheme.primary,
                       ),
                     ),
